@@ -47,6 +47,30 @@ public class MenuPrincipal {
     // regras tem que fazer, vou fazer no trabalho rapidinho e te passo
     private void exibirRegras() {
         System.out.println("--REGRAS--");
-        // Exibir regras do jogo
+        System.out.println("Regras do Jogo\n" + //
+                        "\n" + //
+                        "Bem-vindo ao nosso jogo de RPG inspirado em Dungeons & Dragons! Aqui estão as regras básicas para você entender como jogar e aproveitar ao máximo a sua aventura.\n" + //
+                        "\n" + //
+                        "    Criação da Party:\n" + //
+                        "        Você começará criando uma party de três heróis.\n" + //
+                        "        Cada herói deve ter um nome, raça e classe.\n" + //
+                        "        As raças disponíveis são: Anão, Elfo, Halfling, Humano, Draconato, Gnomo, Meio-Elfo, Meio-Orc, e Tiefling.\n" + //
+                        "        As classes disponíveis são: Guerreiro, Mago, Ladino, Patrulheiro e Monge.\n" + //
+                        "        Cada classe possui atributos específicos que influenciam suas habilidades de combate.\n" + //
+                        "\n" + //
+                        "    Atributos dos Heróis:\n" + //
+                        "        HP (Pontos de Vida): A quantidade de dano que um herói pode suportar antes de ser derrotado.\n" + //
+                        "        CA (Classe de Armadura): A capacidade do herói de evitar ataques.\n" + //
+                        "        Iniciativa: Determina a ordem de ação no combate.\n" + //
+                        "        Atributos Específicos: Cada classe possui atributos únicos que influenciam suas habilidades de ataque e defesa.\n" + //
+                        "\n" + //
+                        "    Combate:\n" + //
+                        "        O combate é baseado em turnos, e a ordem de ação é determinada pela rolagem de iniciativa.\n" + //
+                        "        Em cada turno, um herói pode realizar um ataque normal ou um ataque especial.\n" + //
+                        "        Ataque Normal: Um ataque padrão que causa dano baseado na classe do herói.\n" + //
+                        "        Ataque Especial: Um ataque mais poderoso com maior potencial de dano, mas pode ter limitações ou condições especiais.\n" + //
+                        "        O combate continua até que todos os heróis ou inimigos sejam derrotados.\n" + //
+                        "\n" + //
+                        "");
     }
 }
