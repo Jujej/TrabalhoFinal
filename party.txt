@@ -1,0 +1,3 @@
+Ladino,Jonas,Meio-Orc
+Monge,João,Elfo
+Patrulheiro,Rafael,Gnomo

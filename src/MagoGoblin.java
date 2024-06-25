@@ -1,6 +1,4 @@
-import java.io.Serializable;
-
-class Mago extends Heroi implements Serializable {
+class Mago extends Heroi {
 
     //atributos
     private int magia;

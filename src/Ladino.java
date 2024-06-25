@@ -1,6 +1,4 @@
-import java.io.Serializable;
-
-class Ladino extends Heroi implements Serializable {
+class Ladino extends Heroi {
 
     //atributos
     private int furtividade;

@@ -1,6 +1,4 @@
-import java.io.Serializable;
-
-class Patrulheiro extends Heroi implements Serializable {
+class Patrulheiro extends Heroi {
 
     //atributos
     private int precisao;

@@ -1,13 +1,11 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.io.*;
 
 public class GerDeParty {
     private List<Heroi> party = new ArrayList<>();
 
-    //Carrega do txt, tem uma grande chance de ser isso que ta cagando com
-    // a droga do script
     public GerDeParty() {
         carregarParty();
     }
@@ -16,8 +14,8 @@ public class GerDeParty {
         return party;
     }
 
-    //menuzinho de criação do char (funciona, mas verifique a parte do txt)
     public void criarParty(Scanner scanner) {
+        party.clear(); // Esvazia a lista de heróis antes de criar uma nova party
         System.out.println("Aqui você criará seus três personagens para sua aventura!");
 
         for (int i = 1; i <= 3; i++) {
@@ -37,7 +35,6 @@ public class GerDeParty {
         salvarParty();
     }
 
-    // seleção da raça (funciona)
     private String escolherRaca(Scanner scanner) {
         String[] racas = {"Anão", "Elfo", "Halfling", "Humano", "Draconato", "Gnomo", "Meio-Elfo", "Meio-Orc", "Tiefling"};
         for (int i = 0; i < racas.length; i++) {
@@ -48,7 +45,6 @@ public class GerDeParty {
         return racas[opcao - 1];
     }
 
-    //seleção da classe (funciona)
     private Heroi escolherClasse(Scanner scanner, String nome, String raca) {
         System.out.println("1 - Guerreiro\n2 - Mago\n3 - Ladino\n4 - Patrulheiro\n5 - Monge");
         int opcao = scanner.nextInt();
@@ -70,8 +66,6 @@ public class GerDeParty {
         }
     }
 
-    //listar membros (as vezes funciona, não entendi bem o criterio,mas 
-    //acho que é o terminal)
     public void listarParty() {
         if (party.isEmpty()) {
             System.out.println("A party está vazia.");
@@ -83,7 +77,6 @@ public class GerDeParty {
         }
     }
 
-    //editar membros (funciona)
     public void editarMembroParty(Scanner scanner) {
         listarParty();
         if (party.isEmpty()) return;
@@ -109,34 +102,57 @@ public class GerDeParty {
         }
     }
 
-    //excluir (funciona)
     public void excluirParty() {
         party.clear();
         salvarParty();
         System.out.println("Party excluída com sucesso.");
     }
 
-    //salvar no txt (não faço a menor ideia de como isso funciona, arrume!!)
     private void salvarParty() {
-        try (FileOutputStream fos = new FileOutputStream("party.txt");
-             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(party);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("party.txt"))) {
+            for (Heroi heroi : party) {
+                bw.write(heroi.getClass().getSimpleName() + "," + heroi.getNome() + "," + heroi.getRaca());
+                bw.newLine();
+            }
             System.out.println("Party salva com sucesso!");
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Erro ao salvar a party: " + e.getMessage());
         }
     }
 
-    //não me pergunte o que é isso
-    @SuppressWarnings("unchecked")
     private void carregarParty() {
-        try (FileInputStream fis = new FileInputStream("party.txt");
-             ObjectInputStream ois = new ObjectInputStream(fis)) {
-            party = (List<Heroi>) ois.readObject();
-            System.out.println("Party carregada com sucesso!");
+        try (BufferedReader br = new BufferedReader(new FileReader("party.txt"))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String classe = dados[0];
+                String nome = dados[1];
+                String raca = dados[2];
+
+                switch (classe) {
+                    case "Guerreiro":
+                        party.add(new Guerreiro(nome, raca));
+                        break;
+                    case "Mago":
+                        party.add(new Mago(nome, raca));
+                        break;
+                    case "Ladino":
+                        party.add(new Ladino(nome, raca));
+                        break;
+                    case "Patrulheiro":
+                        party.add(new Patrulheiro(nome, raca));
+                        break;
+                    case "Monge":
+                        party.add(new Monge(nome, raca));
+                        break;
+                    default:
+                        System.out.println("Classe desconhecida encontrada no arquivo: " + classe);
+                        break;
+                }
+            }
         } catch (FileNotFoundException e) {
             System.out.println("Nenhuma party salva encontrada.");
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Erro ao carregar a party: " + e.getMessage());
         }
     }
